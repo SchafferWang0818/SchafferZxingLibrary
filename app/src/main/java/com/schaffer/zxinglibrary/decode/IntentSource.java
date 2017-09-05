@@ -16,6 +16,7 @@
 
 package com.schaffer.zxinglibrary.decode;
 
+/*可删*/
 public enum IntentSource {
 
     NATIVE_APP_INTENT,

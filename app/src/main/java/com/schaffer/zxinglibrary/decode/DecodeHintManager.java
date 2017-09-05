@@ -30,6 +30,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author Lachezar Dobrev
+ * 可删
  */
 final class DecodeHintManager {
   

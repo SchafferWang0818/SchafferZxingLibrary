@@ -21,6 +21,7 @@ package com.schaffer.zxinglibrary.decode;
  * These strings are effectively API and cannot be changed.
  *
  * @author dswitkin@google.com (Daniel Switkin)
+ * 可删
  */
 public final class Intents {
   private Intents() {

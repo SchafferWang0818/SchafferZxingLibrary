@@ -24,6 +24,7 @@ import android.os.Bundle;
  *
  * @author dswitkin@google.com (Daniel Switkin)
  * @author Sean Owen
+ * 可删
  */
 public final class PreferencesActivity extends Activity {
 

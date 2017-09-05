@@ -12,4 +12,5 @@
         android:onClick="onScan"
         android:text="scan!" />
 
+    <!--可删-->
 </LinearLayout>

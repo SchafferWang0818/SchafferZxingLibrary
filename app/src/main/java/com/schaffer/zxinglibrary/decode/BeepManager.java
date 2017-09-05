@@ -26,7 +26,6 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.schaffer.zxinglibrary.PreferencesActivity;
 import com.schaffer.zxinglibrary.R;
 
 import java.io.Closeable;
@@ -38,7 +37,16 @@ import java.io.IOException;
 public final class BeepManager implements MediaPlayer.OnErrorListener, Closeable {
 
     private static final String TAG = BeepManager.class.getSimpleName();
-
+    public static final String KEY_PLAY_BEEP = "preferences_play_beep";
+    public static final String KEY_VIBRATE = "preferences_vibrate";
+    public static final String KEY_COPY_TO_CLIPBOARD = "preferences_copy_to_clipboard";
+    public static final String KEY_FRONT_LIGHT_MODE = "preferences_front_light_mode";
+    public static final String KEY_BULK_MODE = "preferences_bulk_mode";
+    public static final String KEY_REMEMBER_DUPLICATES = "preferences_remember_duplicates";
+    public static final String KEY_ENABLE_HISTORY = "preferences_history";
+    public static final String KEY_SUPPLEMENTAL = "preferences_supplemental";
+    public static final String KEY_AUTO_FOCUS = "preferences_auto_focus";
+    
     private static final float BEEP_VOLUME = 0.10f;
     private static final long VIBRATE_DURATION = 200L;
 
@@ -56,7 +64,7 @@ public final class BeepManager implements MediaPlayer.OnErrorListener, Closeable
     public synchronized void updatePrefs() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
         playBeep = shouldBeep(prefs, activity);
-        vibrate = prefs.getBoolean(PreferencesActivity.KEY_VIBRATE, false);
+        vibrate = prefs.getBoolean( KEY_VIBRATE, false);
         if (playBeep && mediaPlayer == null) {
             // The volume on STREAM_SYSTEM is not adjustable, and users found it too loud,
             // so we now play on the music stream.
@@ -76,7 +84,7 @@ public final class BeepManager implements MediaPlayer.OnErrorListener, Closeable
     }
 
     private static boolean shouldBeep(SharedPreferences prefs, Context activity) {
-        boolean shouldPlayBeep = prefs.getBoolean(PreferencesActivity.KEY_PLAY_BEEP, true);
+        boolean shouldPlayBeep = prefs.getBoolean( KEY_PLAY_BEEP, true);
         if (shouldPlayBeep) {
             // See if sound settings overrides this
             AudioManager audioService = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
