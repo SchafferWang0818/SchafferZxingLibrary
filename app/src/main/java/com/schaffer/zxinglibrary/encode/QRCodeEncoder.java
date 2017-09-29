@@ -55,7 +55,8 @@ public final class QRCodeEncoder {
         }
         BitMatrix result;
         try {
-            result = new MultiFormatWriter().encode(contentsToEncode, BarcodeFormat.QR_CODE, dimension, dimension, hints);
+//            result = new MultiFormatWriter().encode(contentsToEncode, BarcodeFormat.QR_CODE, dimension, dimension, hints);
+            result = deleteWhite(new MultiFormatWriter().encode(contentsToEncode, BarcodeFormat.QR_CODE, dimension, dimension, hints));
         } catch (IllegalArgumentException iae) {
             // Unsupported format
             return null;
@@ -85,4 +86,25 @@ public final class QRCodeEncoder {
         return null;
     }
 
+    /**
+     * 清白边
+     *
+     * @param matrix
+     * @return
+     */
+    private static BitMatrix deleteWhite(BitMatrix matrix) {
+        int[] rec = matrix.getEnclosingRectangle();
+        int resWidth = rec[2] + 1;
+        int resHeight = rec[3] + 1;
+
+        BitMatrix resMatrix = new BitMatrix(resWidth + 10, resHeight + 10);
+        resMatrix.clear();
+        for (int i = 0; i < resWidth; i++) {
+            for (int j = 0; j < resHeight; j++) {
+                if (matrix.get(i + rec[0], j + rec[1]))//left,top
+                    resMatrix.set(i + 5, j + 5);
+            }
+        }
+        return resMatrix;
+    }
 }
